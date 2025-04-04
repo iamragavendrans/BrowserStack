@@ -1,3 +1,3 @@
 package com.elPaisScraper.driver;
 
-public enum BrowserType {EDGE, CHROME, FIREFOX}
+public enum BrowserType {EDGE, CHROME, FIREFOX, SAFARI}

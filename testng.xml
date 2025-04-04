@@ -1,9 +1,28 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="CrossBrowserSuite" parallel="tests" thread-count="5">
 
-    <test name="Chrome_Windows">
+    <listeners>
+        <listener class-name="com.elPaisScraper.util.ParameterListener"/>
+    </listeners>
+
+    <parameter name="runEnv" value="browserstack"/>
+
+    <test name="Edge_Win10">
+        <parameter name="runEnv" value="browserstack"/>
+        <parameter name="browser" value="edge"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="10"/>
+        <parameter name="browserVersion" value="latest"/>
+        <classes>
+            <class name="elPaisScraper.runner.TestRunner"/>
+        </classes>
+    </test>
+
+    <test name="Chrome_Win11">
+        <parameter name="runEnv" value="browserstack"/>
+        <parameter name="browser" value="chrome"/>
         <parameter name="os" value="Windows"/>
         <parameter name="osVersion" value="11"/>
-        <parameter name="browser" value="Chrome"/>
         <parameter name="browserVersion" value="latest"/>
         <classes>
             <class name="elPaisScraper.runner.TestRunner"/>
@@ -11,6 +30,7 @@
     </test>
 
     <test name="Firefox_Windows">
+        <parameter name="runEnv" value="browserstack"/>
         <parameter name="os" value="Windows"/>
         <parameter name="osVersion" value="10"/>
         <parameter name="browser" value="Firefox"/>
@@ -20,34 +40,29 @@
         </classes>
     </test>
 
-    <test name="Chrome_Android">
-        <parameter name="os" value="Android"/>
+    <!-- Mobile: Android (Samsung Galaxy S23) + Chrome -->
+    <test name="Android_S23_Chrome">
+        <parameter name="runEnv" value="browserstack"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="browserVersion" value="latest"/>
+        <parameter name="os" value="android"/>
         <parameter name="osVersion" value="13.0"/>
-        <parameter name="browser" value="Chrome"/>
-        <parameter name="browserVersion" value="latest"/>
+        <parameter name="deviceName" value="Samsung Galaxy S23"/>
         <classes>
             <class name="elPaisScraper.runner.TestRunner"/>
         </classes>
     </test>
 
-    <test name="Safari_iOS">
-        <parameter name="os" value="iOS"/>
-        <parameter name="osVersion" value="16"/>
-        <parameter name="browser" value="Safari"/>
+    <!-- Mobile: iOS (iPhone 15) + Safari -->
+    <test name="iOS_iPhone15_Safari">
+        <parameter name="runEnv" value="browserstack"/>
+        <parameter name="browser" value="safari"/>
         <parameter name="browserVersion" value="latest"/>
+        <parameter name="os" value="ios"/>
+        <parameter name="osVersion" value="17"/>
+        <parameter name="deviceName" value="iPhone 15"/>
         <classes>
             <class name="elPaisScraper.runner.TestRunner"/>
         </classes>
     </test>
-
-    <test name="Edge_Windows">
-        <parameter name="os" value="Windows"/>
-        <parameter name="osVersion" value="11"/>
-        <parameter name="browser" value="Edge"/>
-        <parameter name="browserVersion" value="latest"/>
-        <classes>
-            <class name="elPaisScraper.runner.TestRunner"/>
-        </classes>
-    </test>
-
 </suite>
