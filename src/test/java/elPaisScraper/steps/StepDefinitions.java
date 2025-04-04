@@ -1,11 +1,13 @@
 package elPaisScraper.steps;
 
 import com.elPaisScraper.api.Translator;
+import com.elPaisScraper.driver.DriverFactory;
 import com.elPaisScraper.driver.DriverManager;
 import com.elPaisScraper.model.Article;
 import com.elPaisScraper.scraper.ArticleFetcher;
 import com.elPaisScraper.util.LanguageVerifier;
 import com.elPaisScraper.util.TextAnalyzer;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -30,9 +32,13 @@ public class StepDefinitions {
 
     private WebDriver driver;
 
+    private WebDriver getDriver() {
+        return DriverFactory.getDriver(); // Fetching driver at runtime explicitly
+    }
+
     @Given("I launch the El Pais website")
     public void launchElPais() {
-        driver = DriverManager.getDriver();
+        driver = getDriver();
         driver.get("https://elpais.com/");
         logger.info("Navigated to El Pais homepage.");
         acceptCookiesIfPresent(driver);
@@ -40,14 +46,14 @@ public class StepDefinitions {
 
     @Given("I verify the El Pais website is in Spanish")
     public void verifyThePageInSpanish() {
-        boolean isSpanish = LanguageVerifier.isPageInSpanish(driver);
+        boolean isSpanish = LanguageVerifier.isPageInSpanish(getDriver());
         logger.info("Language Check: isPageInSpanish = {}", isSpanish);
         Assert.assertTrue(isSpanish, "The website is NOT in Spanish.");
     }
 
     @When("I navigate to the Opinion section and fetch 5 articles")
     public void fetchArticles() {
-        ArticleFetcher fetcher = new ArticleFetcher(driver);
+        ArticleFetcher fetcher = new ArticleFetcher(getDriver());
         articles.addAll(fetcher.fetchFirstFiveOpinionArticles());
         printArticlesAsTable(articles);
     }

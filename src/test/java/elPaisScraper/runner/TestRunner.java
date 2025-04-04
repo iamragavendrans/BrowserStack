@@ -1,33 +1,27 @@
 package elPaisScraper.runner;
 
-import elPaisScraper.base.RetryAnalyzer;
+import com.elPaisScraper.driver.DriverFactory;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
-import org.testng.IAnnotationTransformer;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.ITestAnnotation;
+import org.testng.ITestContext;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
+@CucumberOptions(features = "src/test/resources/features",
+        glue = {"elPaisScraper.steps", "elPaisScraper.base"},
+        tags = "@ElPaisScraper",
+        plugin = {"pretty"})
 
-@CucumberOptions(
-        features = "src/test/resources/features",
-        glue = {"elPaisScraper/steps", "elPaisScraper/base"},
-        tags = "(@ElPaisScraper)",
-        plugin = {"pretty", "html:target/cucumber-reports.html"},
-        monochrome = true
-)
-public class TestRunner extends AbstractTestNGCucumberTests implements IAnnotationTransformer {
+public class TestRunner extends AbstractTestNGCucumberTests {
 
-    @Override
-    @DataProvider(parallel = true)
-    public Object[][] scenarios() {
-        return super.scenarios();
+    @BeforeMethod(alwaysRun = true)
+    @Parameters({"runEnv", "browser", "os", "osVersion", "browserVersion"})
+    public void beforeTest(String runEnv, String browser, String os, String osVersion, String browserVersion, ITestContext context) {
+        DriverFactory.setXmlTest(context.getCurrentXmlTest());
+        System.setProperty("runEnv", runEnv);
+        System.setProperty("browser", browser);
+        System.setProperty("os", os);
+        System.setProperty("osVersion", osVersion);
+        System.setProperty("browserVersion", browserVersion);
     }
-
-    @Override
-    public void transform(ITestAnnotation annotation, Class testClass, Constructor testConstructor, Method testMethod) {
-        annotation.setRetryAnalyzer(RetryAnalyzer.class);
-    }
-
 }
