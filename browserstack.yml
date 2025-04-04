@@ -1,0 +1,22 @@
+userName: ragavendrans_sHYhx7
+accessKey: AS3YdnW1uxbpxw1zDMUG
+platforms:
+  - os: Windows
+    osVersion: 10
+    browserName: Edge
+    browserVersion: 132.0
+  - os: OS X
+    osVersion: Sequoia
+    browserName: Chrome
+    browserVersion: 132.0
+  - deviceName: iPhone 13
+    osVersion: 15
+    browserName: safari
+    deviceOrientation: portrait
+browserstackLocal: false
+buildName: elPaisScrapper
+buildIdentifier: ${BUILD_NUMBER}
+projectName: el Pais Scrapper
+debug: true
+networkLogs: true
+consoleLogs: info
