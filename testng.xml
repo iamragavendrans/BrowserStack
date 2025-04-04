@@ -1,0 +1,53 @@
+<suite name="CrossBrowserSuite" parallel="tests" thread-count="5">
+
+    <test name="Chrome_Windows">
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="browserVersion" value="latest"/>
+        <classes>
+            <class name="elPaisScraper.runner.TestRunner"/>
+        </classes>
+    </test>
+
+    <test name="Firefox_Windows">
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="10"/>
+        <parameter name="browser" value="Firefox"/>
+        <parameter name="browserVersion" value="latest"/>
+        <classes>
+            <class name="elPaisScraper.runner.TestRunner"/>
+        </classes>
+    </test>
+
+    <test name="Chrome_Android">
+        <parameter name="os" value="Android"/>
+        <parameter name="osVersion" value="13.0"/>
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="browserVersion" value="latest"/>
+        <classes>
+            <class name="elPaisScraper.runner.TestRunner"/>
+        </classes>
+    </test>
+
+    <test name="Safari_iOS">
+        <parameter name="os" value="iOS"/>
+        <parameter name="osVersion" value="16"/>
+        <parameter name="browser" value="Safari"/>
+        <parameter name="browserVersion" value="latest"/>
+        <classes>
+            <class name="elPaisScraper.runner.TestRunner"/>
+        </classes>
+    </test>
+
+    <test name="Edge_Windows">
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <parameter name="browser" value="Edge"/>
+        <parameter name="browserVersion" value="latest"/>
+        <classes>
+            <class name="elPaisScraper.runner.TestRunner"/>
+        </classes>
+    </test>
+
+</suite>
